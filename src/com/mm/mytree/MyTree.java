@@ -10,20 +10,15 @@ public class MyTree<T> {
         return this.root;
     }
 
-    public <T> void printTree(Node<T> node, String appender) {
-        System.out.println(appender + node.getNode());
-        node.getChildren().forEach(each ->  printTree(each, appender + appender));
-    }
-
     public int getRootKey() {
         return this.root.getNodeKey();
     }
 
     public void deleteNode(Node<T> node) {
         if (node.getParent() != null) {
-            int index = node.getParent().getChildren().indexOf(node);  // get index of node in parent's children list
-            node.getParent().getChildren().remove(node);            // remove node from parent's children list
-            for (Node<T> each : node.getChildren()) {                  // set parent for every node from children list
+            int index = node.getParent().getChildren().indexOf(node);
+            node.getParent().getChildren().remove(node);
+            for (Node<T> each : node.getChildren()) {
                 each.setParent(node.getParent());
             }
             node.getParent().getChildren().addAll(index, node.getChildren());
@@ -45,5 +40,10 @@ public class MyTree<T> {
             newParent.getChildren().addAll(this.root.getChildren());
         }
         this.root = newParent;
+    }
+
+    public <T> void printTree(Node<T> node, String appender) {
+        System.out.println(appender + node.getNode());
+        node.getChildren().forEach(each ->  printTree(each, appender + appender));
     }
 }

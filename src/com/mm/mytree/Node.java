@@ -56,16 +56,16 @@ public class Node<T>{
     public void deleteNode() {
         if (parent != null) {
             System.out.println("node parent: " + this.getParent().getNode());
-            int index = this.parent.getChildren().indexOf(this);  // get index of node in parent's children list
+            int index = this.parent.getChildren().indexOf(this);
             System.out.println("node index: " + index);
             System.out.println("this node: " + this.getNode());
-            this.parent.getChildren().remove(this);            // remove node from parent's children list
-            for (Node<T> each : getChildren()) {                  // set parent for every node from children list
+            this.parent.getChildren().remove(this);
+            for (Node<T> each : getChildren()) {
                 each.setParent(this.parent);
             }
-            this.parent.getChildren().addAll(index, this.getChildren());   // set node's children after current children
+            this.parent.getChildren().addAll(index, this.getChildren());
         } else {
-            deleteRootNode();           // since node is root, delete root node
+            deleteRootNode();
         }
         this.getChildren().clear();
     }
