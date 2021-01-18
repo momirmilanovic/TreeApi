@@ -1,4 +1,4 @@
-package com.mm.mytree;
+package main.java.com.mm.mytree;
 
 public class MyTree<T> {
     public Node<T> root;

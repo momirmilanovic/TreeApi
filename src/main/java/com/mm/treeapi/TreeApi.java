@@ -1,7 +1,7 @@
-package com.mm.treeapi;
+package main.java.com.mm.treeapi;
 
-import com.mm.mytree.MyTree;
-import com.mm.mytree.Node;
+import main.java.com.mm.mytree.MyTree;
+import main.java.com.mm.mytree.Node;
 import com.mm.persons.Person;
 
 

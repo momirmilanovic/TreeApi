@@ -2,4 +2,4 @@ Manifest-Version: 1.0
 Built-By: Momir Milanovic
 Build-Jdk:  openjdk 15-ea 2020-09-15
 Created-By: Apache Maven 3.7.0
-Main-Class: com.mm.treeapi.TreeApi
+Main-Class: main.java.com.mm.treeapi.TreeApi
