@@ -1,4 +1,4 @@
-package main.java.com.mm.mytree;
+package com.mm.mytree;
 
 import java.util.List;
 import java.util.ArrayList;
