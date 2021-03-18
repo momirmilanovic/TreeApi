@@ -3,10 +3,7 @@ package com.mm.treeapi;
 import com.mm.mytree.MyTree;
 import com.mm.mytree.Node;
 import com.mm.persons.Person;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TreeController {
@@ -16,10 +13,42 @@ public class TreeController {
         return "TreeApi REST!";
     }
 
-    @PostMapping("/createtree/{rootName}/{rootId}")
-    public String createTree(@PathVariable String rootName, @PathVariable int rootId) {
-        MyTree newTree = new MyTree(new Node(rootId, new Person(rootName, rootId)));
-        TreeListHandler.addTree(newTree);
-        return "Created tree " + newTree.getRoot().getNodeData();
+    @PostMapping("/createtree/{treeName}/{rootName}/{rootId}")
+    public String createTree(@PathVariable String treeName, @PathVariable String rootName, @PathVariable int rootId) {
+        TreeListHandler.addTree(new MyTree(treeName, new Node(rootId, new Person(rootName, rootId))));
+        return "Created tree " + treeName;
+    }
+
+    @PostMapping("/addnodeintree/{treeName}/{node}/{parentKey}")
+    public String addNodeInTree(@PathVariable String treeName, @PathVariable int node, @PathVariable int parentKey) {
+        TreeListHandler.addNodeInTree(treeName, new Node(node, new Person("p_" + Integer.toString(node), node)), parentKey);
+        return "Added " + node + " in tree " + treeName;
+    }
+
+    @GetMapping("/tree/{treeName}")
+    public String tree(@PathVariable String treeName) {
+        TreeListHandler.getTree(treeName).printTree(treeName);
+        return "Printed tree " + treeName;
+    }
+
+    @GetMapping("/alltrees")
+    public String allTrees() {
+        System.out.println("Printing all trees:");
+        for (MyTree t : TreeListHandler.treeList) {
+            t.printTree(t.getTreeName());
+        }
+        return "Printed all trees (" + TreeListHandler.treeList.size() + ")";
+    }
+
+
+    @DeleteMapping("/{treeName}")
+    public String deleteTree(@PathVariable String treeName) {
+        TreeListHandler.removeTree(treeName);
+        return "Delete " + treeName;
+    }
+
+    @DeleteMapping("/{treeName}/{node}")
+    public String deleteNode(@PathVariable String treeName, @PathVariable String node) {
+        return "Deleted node " + node + " from " + treeName;
     }
 }
