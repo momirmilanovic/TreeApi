@@ -36,11 +36,13 @@ public class TreeApi {
 
         System.out.println("****************  11111111111111111:");
         TreeListHandler.getTree("myTree3").printTree("myTree3");
-        TreeListHandler.addNodeInTree("myTree3", new Node(35, new Person("p_35", 35)), myTree3.getRoot());
+        TreeListHandler.addNodeInTree("myTree3", new Node(35, new Person("p_35", 35)), myTree3.getRoot().getNodeKey());
         System.out.println("****************  222222222222222222");
         TreeListHandler.getTree("myTree3").printTree("myTree3");
         System.out.println("****************  333333333333333333333333");
         TreeListHandler.addNodeInTree("myTree3", new Node(37, new Person("p_37", 37)), 32);
+        TreeListHandler.getTree("myTree3").printTree("myTree3");
+        TreeListHandler.deleteNodeFromTree("myTree3", 32);
         TreeListHandler.getTree("myTree3").printTree("myTree3");
 
         // TreeListHandler.printTree(myTree3);

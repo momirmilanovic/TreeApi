@@ -47,8 +47,9 @@ public class TreeController {
         return "Delete " + treeName;
     }
 
-    @DeleteMapping("/{treeName}/{node}")
-    public String deleteNode(@PathVariable String treeName, @PathVariable String node) {
-        return "Deleted node " + node + " from " + treeName;
+    @DeleteMapping("/{treeName}/{nodeKey}")
+    public String deleteNode(@PathVariable String treeName, @PathVariable int nodeKey) {
+        TreeListHandler.deleteNodeFromTree(treeName, nodeKey);
+        return "Deleted node " + nodeKey + " from " + treeName;
     }
 }

@@ -61,40 +61,53 @@ public class TreeListHandler {
 
     // Add bottom method to work with tree's root instead name
     public static void addNodeInTree(String treeName, Node node, int parentKey) {
-        // System.out.println("addNodeInTree in " + treeName + " add " + node.getNodeData() + " to parent " + parentKey);
+        System.out.println("addNodeInTree in " + treeName + ", add " + node.getNodeData() + ", to parent " + parentKey);
         for (MyTree t : treeList) {
             if (t.getTreeName().equals(treeName)) {
                 // System.out.println("same " + t.getTreeName() + " and " + treeName);
-                t.getNodeByKey(t.getRoot(), parentKey).addChild(node);
+                if (t.getNodeByKey(t.getRoot(), parentKey) != null) {
+                    t.getNodeByKey(t.getRoot(), parentKey).addChild(node);
+                } else {
+                    System.out.println("parentKey " + treeName + " not found");
+                    t.getRoot().addChild(node);
+                }
             }
         }
     }
 
-    public static void deleteNodeFromTree(String treeName, int nodeKey) {
-        for (MyTree t : treeList) {
-            if (t.getTreeName().equals(treeName)) {
-
-            }
-        }
-    }
-
-    // TO CONSIDER!
-    public static void addNodeInTree(String treeName, Node node, Node parent) {
-        // System.out.println("in " + treeName + " add " + node.getNodeData() + " to parent " + parent.getNodeData());
-        for (MyTree t : treeList) {
-            if (t.getTreeName() == treeName) {
-                // System.out.println("same " + t.getTreeName() + " and " + treeName);
-                addNode(t.getRoot(), t.getRoot(), node);
-            }
-        }
-    }
-
+    /*
     public static void addNode(Node parent, Node parentRef, Node node) {
-        // System.out.println("current check " +  parent.getNodeData());
+        System.out.println("addNode parent: " +  parent.getNodeData());
         if (parent == parentRef) {
+            System.out.println("same parent/ref: " +  parent.getNodeData() + parentRef.getNodeData());
             parent.addChild(node);
         }
         parent.getChildren().forEach(each ->  addNode((Node) each, parentRef, node));
     }
+     */
+
+    public static void deleteNodeFromTree(String treeName, int nodeKey) {
+        for (MyTree t : treeList) {
+            if (t.getTreeName().equals(treeName)) {
+                System.out.println("same from " + treeName + " delete " + nodeKey);
+                // Node test = t.getNodeByKey(t.getRoot(), nodeKey);
+                // System.out.println("test " + test.getNodeData());
+                t.deleteNode(t.getNodeByKey(t.getRoot(), nodeKey));
+                // System.out.println("from " + treeName + " delete " + nodeKey);
+                // deleteNode(t, t.getRoot(), nodeKey);
+            }
+        }
+    }
+
+    /*
+    public static void deleteNode(MyTree t, Node node, int nodeKey) {
+        System.out.println("deleteNode " + nodeKey + " from "+ t.getTreeName() + " " + node.getNodeData());
+        if (node.getNodeKey() == nodeKey) {
+            System.out.println("same " + nodeKey + " and " + node.getNodeKey());
+            t.deleteNode(node);
+        }
+        node.getChildren().forEach(each->deleteNode(t, (Node) each, nodeKey));
+    }
+     */
 
 }

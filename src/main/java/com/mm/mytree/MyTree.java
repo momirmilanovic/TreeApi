@@ -1,17 +1,16 @@
 package com.mm.mytree;
 
-import com.mm.persons.Person;
 import com.mm.treeapi.TreeListHandler;
-
-import java.util.concurrent.atomic.AtomicReference;
 
 public class MyTree<T> {
     public String treeName;
     public Node<T> root;
+    private Node searchedNode = null;
 
     public MyTree(String treeName, Node root) {
         this.treeName = treeName;
         this.root = root;
+        // this.parentNode = null;
     }
     /*
     public MyTree(Node root) {
@@ -77,44 +76,35 @@ public class MyTree<T> {
     }
 
 
-    public Node getNodeByKey(Node node, int nodeKey) {
-        //System.out.println("current node: " + node.getNodeData() + ", nodeKey: " + nodeKey);
-        final Node[] parentNode = {null};
+    public Node getNodeByKey(Node root, int nodeKey) {
+        if (root.getNodeKey() == nodeKey) {
+            System.out.println("same keys, node:" + root.getNodeKey());
+            searchedNode= root;
+        }
+
+        root.getChildren().forEach(each -> getNodeByKey((Node) each, nodeKey));
+        return searchedNode;
+    }
+
+    /*
+    public Node getNodeByKey_1st(Node root, int nodeKey) {
+        System.out.println("current node: " + root.getNodeData() + ", nodeKey: " + nodeKey);
+        final Node[] node = {null};
         class CheckNodes {
             public CheckNodes(Node n, int key) {
-                if (n.getNodeKey() == key) {
-                    //System.out.println("same keys, node:" + n.getNodeData());
-                    parentNode[0] = n;
-                }
-            }
-        }
-
-        node.getChildren().forEach(each -> new CheckNodes((Node) each, nodeKey));
-        /*
-        final Node[] parentNode = {null};
-        class CheckNodes {
-             void check(Node n, int key) {
+                System.out.println("compare nodes/keys:" + n.getNodeKey() + ", key: " + key);
                 if (n.getNodeKey() == key) {
                     System.out.println("same keys, node:" + n.getNodeData());
-                    parentNode[0] = n;
+                    node[0] = n;
+
                 }
             }
         }
+        root.getChildren().forEach(each -> new CheckNodes((Node) each, nodeKey));
 
-
-        node.getChildren().forEach(each -> CheckNodes check = new CheckNodes()
-                                           );
-        */
-        /*
-        if (node.getNodeKey() == nodeKey) {
-            System.out.println("same keys, node:" + node.getNodeData());
-            return node;
-        }
-         */
-        //node.getChildren().forEach(each -> getNodeByKey((Node) each, nodeKey));
-        // node.getChildren().forEach(each -> checkNodeKey());
-
-        return parentNode[0];
+        return node[0];
     }
+
+     */
 
 }
