@@ -25,8 +25,8 @@ public class TreeController {
         return "Added " + node + " in tree " + treeName;
     }
 
-    @GetMapping("/tree/{treeName}")
-    public String tree(@PathVariable String treeName) {
+    @GetMapping("/printtree/{treeName}")
+    public String printTree(@PathVariable String treeName) {
         TreeListHandler.getTree(treeName).printTree(treeName);
         return "Printed tree " + treeName;
     }

@@ -59,8 +59,6 @@ public class Node<T>{
         if (parent != null) {
             System.out.println("node parent: " + this.getParent().getNode());
             int index = this.parent.getChildren().indexOf(this);
-            System.out.println("node index: " + index);
-            System.out.println("this node: " + this.getNode());
             this.parent.getChildren().remove(this);
             for (Node<T> each : getChildren()) {
                 each.setParent(this.parent);

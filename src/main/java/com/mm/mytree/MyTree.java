@@ -78,33 +78,12 @@ public class MyTree<T> {
 
     public Node getNodeByKey(Node root, int nodeKey) {
         if (root.getNodeKey() == nodeKey) {
-            System.out.println("same keys, node:" + root.getNodeKey());
+            System.out.println("same keys, parent node key:" + root.getNodeKey());
             searchedNode= root;
         }
 
         root.getChildren().forEach(each -> getNodeByKey((Node) each, nodeKey));
         return searchedNode;
     }
-
-    /*
-    public Node getNodeByKey_1st(Node root, int nodeKey) {
-        System.out.println("current node: " + root.getNodeData() + ", nodeKey: " + nodeKey);
-        final Node[] node = {null};
-        class CheckNodes {
-            public CheckNodes(Node n, int key) {
-                System.out.println("compare nodes/keys:" + n.getNodeKey() + ", key: " + key);
-                if (n.getNodeKey() == key) {
-                    System.out.println("same keys, node:" + n.getNodeData());
-                    node[0] = n;
-
-                }
-            }
-        }
-        root.getChildren().forEach(each -> new CheckNodes((Node) each, nodeKey));
-
-        return node[0];
-    }
-
-     */
 
 }

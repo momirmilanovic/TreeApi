@@ -41,27 +41,11 @@ public class TreeApi {
         TreeListHandler.getTree("myTree3").printTree("myTree3");
         System.out.println("****************  333333333333333333333333");
         TreeListHandler.addNodeInTree("myTree3", new Node(37, new Person("p_37", 37)), 32);
+        System.out.println("****************  44444444444444444444444444444444444444");
         TreeListHandler.getTree("myTree3").printTree("myTree3");
+        System.out.println("****************  55555555555555555555555555");
         TreeListHandler.deleteNodeFromTree("myTree3", 32);
         TreeListHandler.getTree("myTree3").printTree("myTree3");
-
-        // TreeListHandler.printTree(myTree3);
-        /*
-        System.out.println("Printing all trees (main)");
-        for (MyTree t : TreeListHandler.treeList) {
-                t.printTree(t.getTreeName());
-        }
-         */
-        // System.out.println("Main print myTree3");
-        // TreeListHandler.getTree("myTree3").printTree("myTree3");
-        /*
-        MyTree mt3 = TreeListHandler.getTree("myTree3");
-        System.out.println("2nd print mt3");
-        mt3.printTree("mt3");
-         */
-
-        //
-
     }
 
 }
