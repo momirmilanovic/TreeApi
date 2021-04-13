@@ -1,5 +1,6 @@
 package com.mm.treeapi;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.mm.mytree.MyTree;
 import com.mm.mytree.Node;
 import com.mm.persons.Person;
@@ -19,10 +20,10 @@ public class TreeController {
         return "Created tree " + treeName;
     }
 
-    @PostMapping("/addnodeintree/{treeName}/{node}/{parentKey}")
-    public String addNodeInTree(@PathVariable String treeName, @PathVariable int node, @PathVariable int parentKey) {
-        TreeListHandler.addNodeInTree(treeName, new Node(node, new Person("p_" + Integer.toString(node), node)), parentKey);
-        return "Added " + node + " in tree " + treeName;
+    @PostMapping("/addnodeintree/{treeName}/{nodeKey}/{parentKey}")
+    public String addNodeInTree(@PathVariable String treeName, @PathVariable int nodeKey, @PathVariable int parentKey, @RequestBody String personName) {
+        TreeListHandler.addNodeInTree(treeName, new Node(nodeKey, new Person(personName, nodeKey)), parentKey);
+        return "Added " + nodeKey + " in tree " + treeName;
     }
 
     @GetMapping("/printtree/{treeName}")
