@@ -1,6 +1,5 @@
 package com.mm.treeapi;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.mm.mytree.MyTree;
 import com.mm.mytree.Node;
 import com.mm.persons.Person;
@@ -11,7 +10,7 @@ public class TreeController {
 
     @GetMapping("/")
     public String index() {
-        return "TreeApi REST!";
+        return "TreeApi project.";
     }
 
     @PostMapping("/createtree/{treeName}/{rootName}/{rootId}")

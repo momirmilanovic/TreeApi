@@ -46,6 +46,7 @@ public class TreeApi {
         System.out.println("****************  55555555555555555555555555");
         TreeListHandler.deleteNodeFromTree("myTree3", 32);
         TreeListHandler.getTree("myTree3").printTree("myTree3");
+        // TreeListHandler.getTree("myTree3").treeToJson(myTree3.getRoot());
     }
 
 }

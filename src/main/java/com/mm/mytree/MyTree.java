@@ -1,6 +1,9 @@
 package com.mm.mytree;
 
 import com.mm.treeapi.TreeListHandler;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MyTree<T> {
     public String treeName;
@@ -73,6 +76,11 @@ public class MyTree<T> {
     public <T> void printTree(Node<T> node, String appender) {
         System.out.println(appender + node.getNode());
         node.getChildren().forEach(each ->  printTree(each, appender + appender));
+    }
+
+    public JSONObject treeToJson(Node<T> root) {
+        JSONObject jsonTree = new JSONObject();
+        return jsonTree;
     }
 
 
