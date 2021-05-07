@@ -1,5 +1,6 @@
 package com.mm.treeapi;
 
+import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -46,6 +47,9 @@ public class TreeApi {
         System.out.println("****************  55555555555555555555555555");
         TreeListHandler.deleteNodeFromTree("myTree3", 32);
         TreeListHandler.getTree("myTree3").printTree("myTree3");
+        JSONObject jsonTree3 = TreeListHandler.getTree("myTree3").treeToJson(myTree3.getRoot());
+        System.out.println("****************  jsonTree3");
+        System.out.println("jsonTree3:" + jsonTree3);
         // TreeListHandler.getTree("myTree3").treeToJson(myTree3.getRoot());
     }
 

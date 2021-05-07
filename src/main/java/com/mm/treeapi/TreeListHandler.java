@@ -63,7 +63,6 @@ public class TreeListHandler {
         System.out.println("addNodeInTree in " + treeName + ", add " + node.getNodeData() + ", to parent " + parentKey);
         for (MyTree t : treeList) {
             if (t.getTreeName().equals(treeName)) {
-                // System.out.println("same " + t.getTreeName() + " and " + treeName);
                 if (t.getNodeByKey(t.getRoot(), parentKey) != null) {
                     t.getNodeByKey(t.getRoot(), parentKey).addChild(node);
                 } else {
