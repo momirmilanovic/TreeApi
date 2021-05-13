@@ -30,18 +30,28 @@ public class MyTree<T> {
         return this.root.getNodeKey();
     }
 
-    public void deleteNode(Node<T> node) {
+    public boolean deleteNode(Node<T> node) {
+        boolean nodeFound = false;
         if (node.getParent() != null) {
             int index = node.getParent().getChildren().indexOf(node);
-            node.getParent().getChildren().remove(node);
-            for (Node<T> each : node.getChildren()) {
-                each.setParent(node.getParent());
+            if (index != -1) {
+                node.getParent().getChildren().remove(node);
+                for (Node<T> each : node.getChildren()) {
+                    each.setParent(node.getParent());
+                }
+                node.getParent().getChildren().addAll(index, node.getChildren());
+                nodeFound = true;
             }
-            node.getParent().getChildren().addAll(index, node.getChildren());
         } else {
-            deleteRootNode();
+            if (node == this.getRoot()) {
+                deleteRootNode();
+                nodeFound = true;
+            }
         }
-        node.getChildren().clear();
+        if (nodeFound) {
+            node.getChildren().clear();
+        }
+        return nodeFound;
     }
 
     public void deleteRootNode() {
@@ -73,13 +83,17 @@ public class MyTree<T> {
     }
 
     public JSONObject treeToJson(Node<T> root) {
+        // JSONObject treeInJson;
+        System.out.println("json check: " + root.getNodeKey());
         if (root.getParent() != null) {
             jsonTree.put(String.valueOf(root.getNodeKey()), root.getParent().getNodeKey());
         } else {
-            // jsonTree.put(String.valueOf(root.getNodeKey()), 0);
+            jsonTree.put(String.valueOf(root.getNodeKey()), 0);
         }
 
         root.getChildren().forEach(each -> treeToJson((Node) each));
+        //treeInJson = jsonTree;
+        // jsonTree = new JSONObject();
         return jsonTree;
     }
 

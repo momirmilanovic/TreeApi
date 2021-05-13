@@ -3,7 +3,6 @@ package com.mm.treeapi;
 import com.mm.mytree.MyTree;
 import com.mm.mytree.Node;
 import com.mm.persons.Person;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,41 +15,41 @@ public class TreeController {
 
     @PostMapping("/createtree/{treeName}/{rootName}/{rootId}")
     public String createTree(@PathVariable String treeName, @PathVariable String rootName, @PathVariable int rootId) {
-        TreeListHandler.addTree(new MyTree(treeName, new Node(rootId, new Person(rootName, rootId))));
-        return "Created tree " + treeName;
+        return TreeListHandler.addTree(new MyTree(treeName, new Node(rootId, new Person(rootName, rootId))));
     }
 
     @PostMapping("/addnodeintree/{treeName}/{nodeKey}/{parentKey}")
     public String addNodeInTree(@PathVariable String treeName, @PathVariable int nodeKey, @PathVariable int parentKey, @RequestBody String personName) {
-        TreeListHandler.addNodeInTree(treeName, new Node(nodeKey, new Person(personName, nodeKey)), parentKey);
-        return "Added " + nodeKey + " in tree " + treeName;
+        return TreeListHandler.addNodeInTree(treeName, new Node(nodeKey, new Person(personName, nodeKey)), parentKey);
     }
 
     @GetMapping("/printtree/{treeName}")
     public String printTree(@PathVariable String treeName) {
         TreeListHandler.getTree(treeName).printTree(treeName);
-        return String.valueOf(TreeListHandler.getTree("myTree3").treeToJson(TreeListHandler.getTree("myTree3").getRoot()));
+        return String.valueOf(TreeListHandler.getTree(treeName).treeToJson(TreeListHandler.getTree(treeName).getRoot()));
     }
 
     @GetMapping("/alltrees")
     public String allTrees() {
         System.out.println("Printing all trees:");
-        for (MyTree t : TreeListHandler.treeList) {
-            t.printTree(t.getTreeName());
+        try {
+            for (MyTree t : TreeListHandler.treeList) {
+                t.printTree(t.getTreeName());
+            }
+            return "Printed all trees (" + TreeListHandler.treeList.size() + ")";
+        } catch (Exception e) {
+            return "Printing all trees error: " + e;
         }
-        return "Printed all trees (" + TreeListHandler.treeList.size() + ")";
     }
 
 
     @DeleteMapping("/{treeName}")
     public String deleteTree(@PathVariable String treeName) {
-        TreeListHandler.removeTree(treeName);
-        return "Delete " + treeName;
+        return TreeListHandler.removeTree(treeName);
     }
 
     @DeleteMapping("/{treeName}/{nodeKey}")
     public String deleteNode(@PathVariable String treeName, @PathVariable int nodeKey) {
-        TreeListHandler.deleteNodeFromTree(treeName, nodeKey);
-        return "Deleted node " + nodeKey + " from " + treeName;
+        return  TreeListHandler.deleteNodeFromTree(treeName, nodeKey);
     }
 }

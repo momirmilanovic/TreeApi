@@ -10,11 +10,17 @@ public class TreeListHandler {
 
     public static List<MyTree> treeList = new LinkedList<MyTree>();
 
-    public static void addTree(MyTree newTree) {
-        treeList.add(newTree);
+    public static String addTree(MyTree newTree) {
+        try {
+            treeList.add(newTree);
+            return "Added " + newTree.getTreeName();
+        } catch (Exception e) {
+            System.out.println("Cannot add new tree " + newTree.getTreeName() + " because " + e);
+        }
+        return "Tree " + newTree.getTreeName() + " not added!";
     }
 
-    public static void removeTree(String treeName) {
+    public static String removeTree(String treeName) {
         MyTree toRemove = null;
         for(MyTree t: treeList)
         {
@@ -26,8 +32,9 @@ public class TreeListHandler {
         }
         if (toRemove != null) {
             treeList.remove(toRemove);
+            return "Removed " + treeName;
         } else
-            System.out.println("No " + treeName + " in treeList");
+            return "No " + treeName + " in treeList!";
     }
 
     public static boolean contains(MyTree tree) {
@@ -59,8 +66,8 @@ public class TreeListHandler {
         return i;
     }
 
-    public static void addNodeInTree(String treeName, Node node, int parentKey) {
-        System.out.println("addNodeInTree in " + treeName + ", add " + node.getNodeData() + ", to parent " + parentKey);
+    public static String addNodeInTree(String treeName, Node node, int parentKey) {
+        // System.out.println("addNodeInTree in " + treeName + ", add " + node.getNodeData() + ", to parent " + parentKey);
         for (MyTree t : treeList) {
             if (t.getTreeName().equals(treeName)) {
                 if (t.getNodeByKey(t.getRoot(), parentKey) != null) {
@@ -69,17 +76,25 @@ public class TreeListHandler {
                     System.out.println("parentKey " + treeName + " not found");
                     t.getRoot().addChild(node);
                 }
+                return "Node " + node.getNodeKey() + " added in " + treeName;
             }
         }
+        return "Tree " + treeName + " not found!";
     }
 
-    public static void deleteNodeFromTree(String treeName, int nodeKey) {
+    public static String deleteNodeFromTree(String treeName, int nodeKey) {
+        // boolean treeFound = false;
         for (MyTree t : treeList) {
             if (t.getTreeName().equals(treeName)) {
-                System.out.println("same from " + treeName + " delete " + nodeKey);
-                t.deleteNode(t.getNodeByKey(t.getRoot(), nodeKey));
+                // treeFound = true;
+                if (t.deleteNode(t.getNodeByKey(t.getRoot(), nodeKey))) {
+                    return "Deleted " + nodeKey + " from " + treeName;
+                } else {
+                    return "No " + nodeKey + " in " + treeName + " tree.";
+                }
             }
         }
+        return "Tree " + treeName + " not found!";
     }
 
 }
