@@ -50,6 +50,7 @@ public class TreeApi {
         JSONObject jsonTree3 = TreeListHandler.getTree("myTree3").treeToJson(myTree3.getRoot());
         System.out.println("****************  jsonTree3");
         System.out.println("jsonTree3:" + jsonTree3);
+        TreeListHandler.getTree("myTree3").setNewJsonTree();
         // TreeListHandler.getTree("myTree3").treeToJson(myTree3.getRoot());
     }
 

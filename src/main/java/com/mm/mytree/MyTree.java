@@ -30,6 +30,10 @@ public class MyTree<T> {
         return this.root.getNodeKey();
     }
 
+    public void setNewJsonTree() {
+        this.jsonTree = new JSONObject();
+    }
+
     public boolean deleteNode(Node<T> node) {
         boolean nodeFound = false;
         if (node.getParent() != null) {
@@ -83,17 +87,15 @@ public class MyTree<T> {
     }
 
     public JSONObject treeToJson(Node<T> root) {
-        // JSONObject treeInJson;
-        System.out.println("json check: " + root.getNodeKey());
+        System.out.println("current node: " + root.getNodeKey());
         if (root.getParent() != null) {
             jsonTree.put(String.valueOf(root.getNodeKey()), root.getParent().getNodeKey());
         } else {
+            setNewJsonTree();
             jsonTree.put(String.valueOf(root.getNodeKey()), 0);
         }
 
         root.getChildren().forEach(each -> treeToJson((Node) each));
-        //treeInJson = jsonTree;
-        // jsonTree = new JSONObject();
         return jsonTree;
     }
 
