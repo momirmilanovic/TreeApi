@@ -1,10 +1,7 @@
 package com.mm.mytree;
 
 import com.mm.treeapi.TreeListHandler;
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class MyTree<T> {
     public String treeName;
@@ -15,7 +12,6 @@ public class MyTree<T> {
     public MyTree(String treeName, Node root) {
         this.treeName = treeName;
         this.root = root;
-        // this.parentNode = null;
     }
 
     public String getTreeName() {
@@ -72,22 +68,21 @@ public class MyTree<T> {
         this.root = newParent;
     }
 
-    public <T> void printTree(String treeName) {
-        for (MyTree t : TreeListHandler.treeList) {
-            if (t.getTreeName().equals(treeName)) {
-                t.printTree(t.getRoot(), " ");
-            }
+    public String printTree(String treeName) {
+        if (TreeListHandler.contains(treeName)) {
+            printTree(TreeListHandler.getTree(treeName).getRoot(), " ");
+            return "Printed tree: " + treeName;
+        } else {
+            return "Tree: " + treeName + " not found!";
         }
     }
-
-
+    
     public <T> void printTree(Node<T> node, String appender) {
         System.out.println(appender + node.getNode());
         node.getChildren().forEach(each ->  printTree(each, appender + appender));
     }
 
     public JSONObject treeToJson(Node<T> root) {
-        System.out.println("current node: " + root.getNodeKey());
         if (root.getParent() != null) {
             jsonTree.put(String.valueOf(root.getNodeKey()), root.getParent().getNodeKey());
         } else {

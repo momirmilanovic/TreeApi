@@ -37,11 +37,13 @@ public class TreeListHandler {
             return "No " + treeName + " in treeList!";
     }
 
-    public static boolean contains(MyTree tree) {
-        if (treeList.contains(tree))
-            return true;
-        else
-            return false;
+    public static boolean contains(String treeName) {
+        for (MyTree t : treeList) {
+            if (t.getTreeName().equals(treeName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static MyTree getTree(String treeName) {
@@ -67,7 +69,6 @@ public class TreeListHandler {
     }
 
     public static String addNodeInTree(String treeName, Node node, int parentKey) {
-        // System.out.println("addNodeInTree in " + treeName + ", add " + node.getNodeData() + ", to parent " + parentKey);
         for (MyTree t : treeList) {
             if (t.getTreeName().equals(treeName)) {
                 if (t.getNodeByKey(t.getRoot(), parentKey) != null) {
@@ -83,10 +84,8 @@ public class TreeListHandler {
     }
 
     public static String deleteNodeFromTree(String treeName, int nodeKey) {
-        // boolean treeFound = false;
         for (MyTree t : treeList) {
             if (t.getTreeName().equals(treeName)) {
-                // treeFound = true;
                 if (t.deleteNode(t.getNodeByKey(t.getRoot(), nodeKey))) {
                     return "Deleted " + nodeKey + " from " + treeName;
                 } else {

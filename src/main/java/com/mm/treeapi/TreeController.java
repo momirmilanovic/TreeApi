@@ -23,10 +23,16 @@ public class TreeController {
         return TreeListHandler.addNodeInTree(treeName, new Node(nodeKey, new Person(personName, nodeKey)), parentKey);
     }
 
-    @GetMapping("/printtree/{treeName}")
+    @GetMapping("/showtree/{treeName}")
     public String printTree(@PathVariable String treeName) {
-        TreeListHandler.getTree(treeName).printTree(treeName);
-        return String.valueOf(TreeListHandler.getTree(treeName).treeToJson(TreeListHandler.getTree(treeName).getRoot()));
+        if (TreeListHandler.getTree(treeName) != null) {
+            TreeListHandler.getTree(treeName).printTree(treeName);
+            return String.valueOf(TreeListHandler.getTree(treeName).treeToJson(TreeListHandler.getTree(treeName).getRoot()));
+        } else {
+            return "Tree " + treeName + " not found!";
+        }
+
+
     }
 
     @GetMapping("/alltrees")
