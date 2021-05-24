@@ -3,3 +3,4 @@ out/artifacts/
 out/artifacts/TreeApi_jar/
 target/
 *.class
+TreeApi.iml
